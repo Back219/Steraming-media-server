@@ -3,7 +3,22 @@ import cors from 'cors';
 import path from 'path';
 import mediaRoutes from './routes/media';
 import streamRoutes from './routes/stream';
-import { PORT } from './config';
+import accountsRoutes from './routes/accounts'; // <-- NEW
+
+const app = express();
+const PORT = process.env.PORT || 3500;
+
+app.use(cors());
+app.use(express.json());
+
+// API Routes
+app.use('/api/media', mediaRoutes);
+app.use('/api/stream', streamRoutes);
+app.use('/api/accounts', accountsRoutes); // <-- NEW
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
 
 const app = express();
 
